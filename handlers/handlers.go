@@ -102,4 +102,7 @@ func Setup(r *gin.Engine, db *gorm.DB) {
 	r.DELETE("/projects", deleteProjectsHandler(db))
 
 	r.POST("/deploy", deployProjectHandler(db))
+
+	r.StaticFile("/openapi.yaml", "./docs/openapi.yaml")
+	r.StaticFile("/swagger", "./docs/index.html")
 }
