@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: Deployment Manager API
+  description: API for managing projects and their deployments
+  version: 1.0.0
+
+paths:
+  /projects:
+    get:
+      summary: Get all projects
+      operationId: getProjects
+      responses:
+        '200':
+          description: List of all projects
+          content:
+            application/json:
+              schema:
+                type: array
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  url:
+                    type: string
+                  branch:
+                    type: string
+                  dockerComposePath:
+                    type: string
+              example:
+                - id: 1
+                  name: "My Project"
+                  url: "https://github.com/user/repo"
+                  branch: "main"
+                  dockerComposePath: "/path/to/docker-compose.yml"
+    post:
+      summary: Create a new project
+      operationId: createProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+                branch:
+                  type: string
+                dockerComposePath:
+                  type: string
+              required:
+                - name
+                - url
+                - branch
+                - dockerComposePath
+            example:
+              name: "My Project"
+              url: "https://github.com/user/repo"
+              branch: "main"
+              dockerComposePath: "/path/to/docker-compose.yml"
+      responses:
+        '201':
+          description: Project created successfully
+        '400':
+          description: Invalid request payload
+    put:
+      summary: Update an existing project
+      operationId: updateProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                name:
+                  type: string
+                url:
+                  type: string
+                branch:
+                  type: string
+                dockerComposePath:
+                  type: string
+              required:
+                - id
+            example:
+              id: 1
+              name: "Updated Project"
+              url: "https://github.com/user/repo"
+              branch: "feature/updated_project"
+              dockerComposePath: "/new/path/to/docker-compose.yml"
+      responses:
+        '200':
+          description: Project updated successfully
+        '400':
+          description: Invalid request payload or project not found
+    delete:
+      summary: Delete an existing project
+      operationId: deleteProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+              required:
+                - id
+            example:
+              id: 1
+      responses:
+        '200':
+          description: Project deleted successfully
+        '400':
+          description: Invalid request payload or project not found
+
+  /deploy:
+    post:
+      summary: Deploy a project
+      operationId: deployProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+              required:
+                - id
+            example:
+              id: 1
+      responses:
+        '200':
+          description: Project deployed successfully
+        '400':
+          description: Invalid request payload or project not found
+        '500':
+          description: Internal server error during deployment
