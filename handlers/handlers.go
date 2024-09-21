@@ -95,13 +95,25 @@ func deployProjectHandler(database *gorm.DB) gin.HandlerFunc {
 	}
 }
 
+func getUiHandler(database *gorm.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var projects []model.Project
+		database.Find(&projects)
+		c.HTML(http.StatusOK, "index.html", projects)
+	}
+}
+
 func Setup(r *gin.Engine, db *gorm.DB) {
+	r.LoadHTMLGlob("templates/*.html")
+
 	r.GET("/projects", getProjectsHandler(db))
 	r.POST("/projects", postProjectsHandler(db))
 	r.PUT("/projects", putProjectsHandler(db))
 	r.DELETE("/projects", deleteProjectsHandler(db))
 
 	r.POST("/deploy", deployProjectHandler(db))
+	r.GET("/ui", getUiHandler(db))
+	r.StaticFile("/ui/create", "./templates/create.html")
 
 	r.StaticFile("/openapi.yaml", "./docs/openapi.yaml")
 	r.StaticFile("/swagger", "./docs/index.html")
