@@ -3,9 +3,6 @@ info:
   title: Deployment Manager API
   description: API for managing projects and their deployments
   version: 1.0.0
-servers:
-  - url: http://localhost:8080
-    description: Local server
 
 paths:
   /projects:
