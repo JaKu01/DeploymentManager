@@ -1,7 +1,7 @@
 package db
 
 import (
-	"DeploymentManager/model"
+	"github.com/JaKu01/DeploymentManager/model"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )

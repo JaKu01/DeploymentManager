@@ -1,8 +1,8 @@
 package main
 
 import (
-	"DeploymentManager/db"
-	"DeploymentManager/handlers"
+	"github.com/JaKu01/DeploymentManager/db"
+	"github.com/JaKu01/DeploymentManager/handlers"
 	"github.com/gin-gonic/gin"
 )
 
