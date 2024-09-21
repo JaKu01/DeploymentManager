@@ -1,4 +1,4 @@
-module DeploymentManager
+module github.com/JaKu01/DeploymentManager
 
 go 1.23.1
 
