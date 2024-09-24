@@ -25,14 +25,11 @@ paths:
                     type: string
                   branch:
                     type: string
-                  dockerComposePath:
-                    type: string
               example:
                 - id: 1
                   name: "My Project"
                   url: "https://github.com/user/repo"
                   branch: "main"
-                  dockerComposePath: "/path/to/docker-compose.yml"
     post:
       summary: Create a new project
       operationId: createProject
@@ -49,18 +46,14 @@ paths:
                   type: string
                 branch:
                   type: string
-                dockerComposePath:
-                  type: string
               required:
                 - name
                 - url
                 - branch
-                - dockerComposePath
             example:
               name: "My Project"
               url: "https://github.com/user/repo"
               branch: "main"
-              dockerComposePath: "/path/to/docker-compose.yml"
       responses:
         '201':
           description: Project created successfully
@@ -84,8 +77,6 @@ paths:
                   type: string
                 branch:
                   type: string
-                dockerComposePath:
-                  type: string
               required:
                 - id
             example:
@@ -93,7 +84,6 @@ paths:
               name: "Updated Project"
               url: "https://github.com/user/repo"
               branch: "feature/updated_project"
-              dockerComposePath: "/new/path/to/docker-compose.yml"
       responses:
         '200':
           description: Project updated successfully
