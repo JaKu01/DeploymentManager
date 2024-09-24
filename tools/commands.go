@@ -1,10 +1,12 @@
 package tools
 
 import (
+	"fmt"
 	"github.com/JaKu01/DeploymentManager/model"
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 )
 
 func CloneProject(project *model.Project) error {
@@ -44,7 +46,10 @@ func PullProject(project *model.Project) error {
 
 func DeployProject(project *model.Project) error {
 	cmd := exec.Command("docker-compose", "up", "-d")
-	cmd.Dir = "../" + project.Name + "/" + project.DockerComposePath
+	composePath, err := getDockerComposePath("../" + project.Name)
+	log.Println("Compose Path: " + composePath)
+
+	cmd.Dir = composePath
 	cmd.Env = os.Environ()
 
 	output, err := cmd.CombinedOutput()
@@ -63,4 +68,29 @@ func CreateProjectFolder(project *model.Project) error {
 func DoesProjectExist(project *model.Project) bool {
 	_, err := os.Stat("../" + project.Name)
 	return !os.IsNotExist(err)
+}
+
+func getDockerComposePath(rootPath string) (string, error) {
+	var dockerComposePath string
+
+	err := filepath.WalkDir(rootPath, func(path string, d os.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if !d.IsDir() && (d.Name() == "docker-compose.yaml" || d.Name() == "docker-compose.yml") {
+			dockerComposePath = filepath.Dir(path)
+			return filepath.SkipDir // Stop walking once found
+		}
+		return nil
+	})
+
+	if err != nil {
+		return "", err
+	}
+
+	if dockerComposePath == "" {
+		return "", fmt.Errorf("docker-compose file not found")
+	}
+
+	return dockerComposePath, nil
 }

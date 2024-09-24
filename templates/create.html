@@ -80,10 +80,6 @@
             <label for="branch">Branch</label>
             <input type="text" id="branch" name="branch" required>
         </div>
-        <div class="form-group">
-            <label for="dockerComposePath">Docker Compose Path</label>
-            <input type="text" id="dockerComposePath" name="dockerComposePath" required>
-        </div>
         <button type="submit" class="submit-button">Add Project</button>
     </form>
 </div>
@@ -96,7 +92,6 @@
             name: this.name.value,
             url: this.url.value,
             branch: this.branch.value,
-            dockerComposePath: this.dockerComposePath.value,
         };
 
         fetch('/projects', {
