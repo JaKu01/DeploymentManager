@@ -17,7 +17,7 @@ paths:
               schema:
                 type: array
                 properties:
-                  id:
+                  ID:
                     type: number
                   name:
                     type: string
@@ -26,7 +26,7 @@ paths:
                   branch:
                     type: string
               example:
-                - id: 1
+                - ID: 1
                   name: "My Project"
                   url: "https://github.com/user/repo"
                   branch: "main"
@@ -69,7 +69,7 @@ paths:
             schema:
               type: object
               properties:
-                id:
+                ID:
                   type: number
                 name:
                   type: string
@@ -80,7 +80,7 @@ paths:
               required:
                 - id
             example:
-              id: 1
+              ID: 1
               name: "Updated Project"
               url: "https://github.com/user/repo"
               branch: "feature/updated_project"
@@ -99,12 +99,12 @@ paths:
             schema:
               type: object
               properties:
-                id:
+                ID:
                   type: number
               required:
-                - id
+                - ID
             example:
-              id: 1
+              ID: 1
       responses:
         '200':
           description: Project deleted successfully
@@ -122,12 +122,12 @@ paths:
             schema:
               type: object
               properties:
-                id:
+                ID:
                   type: number
               required:
-                - id
+                - ID
             example:
-              id: 1
+              ID: 1
       responses:
         '200':
           description: Project deployed successfully

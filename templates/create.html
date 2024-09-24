@@ -103,7 +103,7 @@
         })
             .then(response => {
                 if (response.ok) {
-                    window.location.href = "/ui";  // Redirect to the project list page
+                    window.location.href = "/";  // Redirect to the project list page
                     this.reset();
                 } else {
                     alert('Error adding project: ' + response.statusText);

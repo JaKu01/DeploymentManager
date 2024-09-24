@@ -18,7 +18,7 @@ After that, you can start the deployment manager with the following command:
 ```
 The deployment manager exposes a REST API to manage projects at port 8080.
 ## User Interface
-The UI is available at `:8080/ui`
+The UI is available at `:8080/`
 
 ## API Documentation
 The API documentation is available at `:8080/swagger`

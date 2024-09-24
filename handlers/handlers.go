@@ -112,8 +112,9 @@ func Setup(r *gin.Engine, db *gorm.DB) {
 	r.DELETE("/projects", deleteProjectsHandler(db))
 
 	r.POST("/deploy", deployProjectHandler(db))
-	r.GET("/ui", getUiHandler(db))
-	r.StaticFile("/ui/create", "./templates/create.html")
+	r.GET("/", getUiHandler(db))
+	r.StaticFile("/create", "./templates/create.html")
+	r.StaticFile("/edit", "./templates/edit.html")
 
 	r.StaticFile("/openapi.yaml", "./docs/openapi.yaml")
 	r.StaticFile("/swagger", "./docs/index.html")
