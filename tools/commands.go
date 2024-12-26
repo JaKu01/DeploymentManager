@@ -45,7 +45,7 @@ func PullProject(project *model.Project) error {
 }
 
 func DeployProject(project *model.Project) error {
-	cmd := exec.Command("docker-compose", "up", "-d")
+	cmd := exec.Command("docker-compose", "up", "-d", "--build")
 	composePath, err := getDockerComposePath("../" + project.Name)
 	log.Println("Compose Path: " + composePath)
 
